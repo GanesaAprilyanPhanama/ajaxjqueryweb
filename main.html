@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Contoh Aplikasi Web AJAX dengan jQuery</title>
+	<script src="jquery.js"></script>
+	<script>
+		$(document).ready(function() {
+			$.ajax({
+				url: 'https://dummyjson.com/products',
+				method: 'GET',
+				success: function(data) {
+                    var products = data.products;
+					var table = $('#data-table');
+					for (var i = 0; i < products.length; i++) {
+						var row = $('<tr>');
+						row.append($('<td>').text(products[i].id));
+						row.append($('<td>').text(products[i].title));
+						row.append($('<td>').text(products[i].description));
+						row.append($('<td>').text(products[i].price));
+						table.append(row);
+					}
+				},
+				error: function(error) {
+					console.log('An error:', error);
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1>Data</h1>
+	<table id="data-table" border="1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Products name</th>
+				<th>Description</th>
+				<th>Price in US dollar</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+</body>
+</html>
